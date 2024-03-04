@@ -1,5 +1,5 @@
 <template>
-  <TodoHeader></TodoHeader>
+  <TodoHeader :appTitle="title"></TodoHeader>
   <!--@하위컴퍼넌트 명(add) 상위컴퍼넌트에서 실행할 메서드명-->
   <TodoInput @add="addTodoItem"></TodoInput>
   <!-- :하위Props명칭 = 내려보내줄 배열 -->
@@ -14,6 +14,11 @@ import TodoList from './components/TodoList.vue';
 
   export default {
   components: { TodoHeader,TodoInput, TodoList },
+    data() {
+      return {
+        title: '할일 앱'
+      }
+    },
     setup(){
       const todoItems = ref([]);
 
