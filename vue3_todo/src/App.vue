@@ -3,7 +3,7 @@
   <!--@하위컴퍼넌트 명(add) 상위컴퍼넌트에서 실행할 메서드명-->
   <TodoInput @add="addTodoItem"></TodoInput>
   <!-- :하위Props명칭 = 내려보내줄 배열 -->
-  <todoList :todoItems="todoItems"></todoList>
+  <todoList :todoItems="todoItems" @remove="removeTodoItem"></todoList>
 </template>
 
 <script>
@@ -32,12 +32,18 @@ import TodoList from './components/TodoList.vue';
             
       todoItems.value = fetchTodos();
 
-      // Input컴포넌트에서 실행함
+      // Input컴포넌트에서 실행함(추가)
       function addTodoItem(todo){
         todoItems.value.push(todo);
       }
 
-      return { todoItems, addTodoItem };
+      // List컴포넌트에서 실행함(삭제)
+      function removeTodoItem(item, index){
+        todoItems.value.splice(index,1);
+        localStorage.removeItem(item);
+      }
+
+      return { todoItems, addTodoItem, removeTodoItem };
     }
   }
 </script>
