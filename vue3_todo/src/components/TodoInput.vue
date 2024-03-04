@@ -8,7 +8,7 @@
 <script>
 import { ref } from 'vue'
     export default {
-        setup(){
+        setup(props,context){
             //data
             const todoInput = ref('');
 
@@ -16,9 +16,16 @@ import { ref } from 'vue'
             function addTodo(){
                 const todo = todoInput.value;
                 localStorage.setItem(todo, todo);
+                // emit할땐 context선언이 필요하다.
+                // 메서드명은 add
+                context.emit('add',todo);
+                clearTodo();
             }
 
-            return { todoInput, addTodo }
+            // inputBox 초기화
+            const clearTodo = () => todoInput.value = '';
+
+            return { todoInput, addTodo, clearTodo }
         }
     }
 </script>

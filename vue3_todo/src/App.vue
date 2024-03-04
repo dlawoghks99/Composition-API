@@ -1,6 +1,7 @@
 <template>
   <TodoHeader></TodoHeader>
-  <TodoInput></TodoInput>
+  <!--@하위컴퍼넌트 명(add) 상위컴퍼넌트에서 실행할 메서드명-->
+  <TodoInput @add="addTodoItem"></TodoInput>
   <!-- :하위Props명칭 = 내려보내줄 배열 -->
   <todoList :todoItems="todoItems"></todoList>
 </template>
@@ -31,7 +32,12 @@ import TodoList from './components/TodoList.vue';
             
       todoItems.value = fetchTodos();
 
-      return { todoItems };
+      // Input컴포넌트에서 실행함
+      function addTodoItem(todo){
+        todoItems.value.push(todo);
+      }
+
+      return { todoItems, addTodoItem };
     }
   }
 </script>
