@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import {useMessage} from './hooks/useMessage'
+
 
 export default {
     // data() {
@@ -15,13 +16,16 @@ export default {
     //     }
     // },
     setup(){
-        const message = ref('hello');
+        const {changeMessage,message} = useMessage();
 
-        function changeMessage(){
-            message.value = 'hi';
-        }
+        // const message = ref('hello');
+
+        // function changeMessage(){
+        //     message.value = 'hi';
+        // }
 
         return {message, changeMessage}
+
     },
     // methods:{
     //     changeMessage(){
